@@ -6,6 +6,7 @@ const fs = require('fs')
 
 // img storage confing
 const imgconfig = multer.diskStorage({
+  limits : {fileSize: 2000000},
   destination: (req, photo, callback) => {
     callback(null, "./uploads");
   },
@@ -27,7 +28,7 @@ const upload = multer({
   storage: imgconfig,
   fileFilter: isImage,
   limits: {
-    fileSize: 8000000
+    fileSize: 2000000
   }
 });
 
