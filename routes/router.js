@@ -41,17 +41,16 @@ router.post("/update", upload.single("photo"), (req, res) => {
     const fcontact = req.body.contact;
     const id = req.body.id;
 
-    if (
-      !fname ||
-      !filename ||
-      !frole ||
-      !fdept ||
-      !fempid ||
-      !fdob ||
-      !femail ||
-      !flocation ||
-      !fcontact
-    ) {
+    if (!(fname 
+      || filename 
+      || frole
+      || fdept 
+      || fempid 
+      || fdob 
+      || femail 
+      || flocation 
+      || fcontact
+    )) {
       res.status(422).json({ status: 422, message: "fill all the details" });
     }
 
@@ -95,17 +94,16 @@ router.post("/update", upload.single("photo"), (req, res) => {
     const fcontact = req.body.contact;
     const id = req.body.id;
 
-    if (
-      !fname ||
-      !filename ||
-      !frole ||
-      !fdept ||
-      !fempid ||
-      !fdob ||
-      !femail ||
-      !flocation ||
-      !fcontact
-    ) {
+    if (!(fname 
+      || filename 
+      || frole
+      || fdept 
+      || fempid 
+      || fdob 
+      || femail 
+      || flocation 
+      || fcontact
+    )) {
       res.status(422).json({ status: 422, message: "fill all the details" });
     }
 
