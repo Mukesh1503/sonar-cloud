@@ -41,46 +41,48 @@ router.post("/update", upload.single("photo"), (req, res) => {
     const fcontact = req.body.contact;
     const id = req.body.id;
 
-    if (!(fname 
-      || filename 
+    if (!(fname
+      || filename
       || frole
-      || fdept 
-      || fempid 
-      || fdob 
-      || femail 
-      || flocation 
+      || fdept
+      || fempid
+      || fdob
+      || femail
+      || flocation
       || fcontact
     )) {
       res.status(422).json({ status: 422, message: "fill all the details" });
     }
+    else {
 
-    try {
-      let sql = `UPDATE employees SET ? WHERE id = ?`
-      let id_no = `${id}`
-      conn.query(
-        sql,
-        [{
-          name: fname,
-          role: frole,
-          dept: fdept,
-          emp_id: fempid,
-          dob: fdob,
-          email: femail,
-          location: flocation,
-          contact: fcontact,
-          path: filename,
-        },id_no],
-        (err, result) => {
-          if (err) {
-            console.log("error");
-          } else {
-            console.log("data updated");
-            res.status(201).json({ status: 201, data: req.body });
+      try {
+        let sql = `UPDATE employees SET ? WHERE id = ?`
+        let id_no = `${id}`
+        conn.query(
+          sql,
+          [{
+            name: fname,
+            role: frole,
+            dept: fdept,
+            emp_id: fempid,
+            dob: fdob,
+            email: femail,
+            location: flocation,
+            contact: fcontact,
+            path: filename,
+          }, id_no],
+          (err, result) => {
+            if (err) {
+              console.log("error");
+            } else {
+              console.log("data updated");
+              res.status(201).json({ status: 201, data: req.body });
+            }
           }
-        }
-      );
-    } catch (error) {
-      res.status(422).json({ status: 422, error });
+        );
+      } catch (error) {
+        res.status(422).json({ status: 422, error });
+      }
     }
   } catch (error) {
     const filename = req.body.photo;
@@ -94,46 +96,48 @@ router.post("/update", upload.single("photo"), (req, res) => {
     const fcontact = req.body.contact;
     const id = req.body.id;
 
-    if (!(fname 
-      || filename 
+    if (!(fname
+      || filename
       || frole
-      || fdept 
-      || fempid 
-      || fdob 
-      || femail 
-      || flocation 
+      || fdept
+      || fempid
+      || fdob
+      || femail
+      || flocation
       || fcontact
     )) {
       res.status(422).json({ status: 422, message: "fill all the details" });
     }
+    else {
 
-    try {
-      let sql = `UPDATE employees SET ? WHERE id = ?`
-      let id_no = `${id}`
-      conn.query(
-        sql,
-        [{
-          name: fname,
-          role: frole,
-          dept: fdept,
-          emp_id: fempid,
-          dob: fdob,
-          email: femail,
-          location: flocation,
-          contact: fcontact,
-          path: filename,
-        },id_no],
-        (err, result) => {
-          if (err) {
-            console.log("error");
-          } else {
-            console.log("data updated");
-            res.status(201).json({ status: 201, data: req.body });
+      try {
+        let sql = `UPDATE employees SET ? WHERE id = ?`
+        let id_no = `${id}`
+        conn.query(
+          sql,
+          [{
+            name: fname,
+            role: frole,
+            dept: fdept,
+            emp_id: fempid,
+            dob: fdob,
+            email: femail,
+            location: flocation,
+            contact: fcontact,
+            path: filename,
+          }, id_no],
+          (err, result) => {
+            if (err) {
+              console.log("error");
+            } else {
+              console.log("data updated");
+              res.status(201).json({ status: 201, data: req.body });
+            }
           }
-        }
-      );
-    } catch (error) {
-      res.status(422).json({ status: 422, error });
+        );
+      } catch (error) {
+        res.status(422).json({ status: 422, error });
+      }
     }
   }
 });
@@ -150,46 +154,46 @@ router.post("/register", upload.single("photo"), (req, res) => {
   const flocation = req.body.location;
   const fcontact = req.body.contact;
 
-  if (
-    !fname ||
-    !filename ||
-    !frole ||
-    !fdept ||
-    !fempid ||
-    !fdob ||
-    !femail ||
-    !flocation ||
-    !fcontact
-  ) {
+  if (!(fname
+    || filename
+    || frole
+    || fdept
+    || fempid
+    || fdob
+    || femail
+    || flocation
+    || fcontact
+  )) {
     res.status(422).json({ status: 422, message: "fill all the details" });
   }
+  else {
+    try {
 
-  try {
-
-    conn.query(
-      "INSERT INTO employees SET ?",
-      {
-        name: fname,
-        role: frole,
-        dept: fdept,
-        emp_id: fempid,
-        dob: fdob,
-        email: femail,
-        location: flocation,
-        contact: fcontact,
-        path: filename,
-      },
-      (err, result) => {
-        if (err) {
-          console.log("error");
-        } else {
-          console.log("data added");
-          res.status(201).json({ status: 201, data: req.body });
+      conn.query(
+        "INSERT INTO employees SET ?",
+        {
+          name: fname,
+          role: frole,
+          dept: fdept,
+          emp_id: fempid,
+          dob: fdob,
+          email: femail,
+          location: flocation,
+          contact: fcontact,
+          path: filename,
+        },
+        (err, result) => {
+          if (err) {
+            console.log("error");
+          } else {
+            console.log("data added");
+            res.status(201).json({ status: 201, data: req.body });
+          }
         }
-      }
-    );
-  } catch (error) {
-    res.status(422).json({ status: 422, error });
+      );
+    } catch (error) {
+      res.status(422).json({ status: 422, error });
+    }
   }
 });
 
@@ -215,7 +219,7 @@ router.delete("/:id", (req, res) => {
   try {
     let sql = `DELETE FROM employees WHERE id = ?`
     let id_no = `${id}`
-    conn.query(sql,[id_no], (err, result) => {
+    conn.query(sql, [id_no], (err, result) => {
       if (err) {
         console.log("error");
       } else {
