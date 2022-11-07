@@ -7,7 +7,7 @@ const { config } = require("dotenv");
 const path = require('path')
 
 let corsOptions = {
-  origin: '*'
+  origin: "neo-crud.herokuapp.com"
 }
 
 app.disable("x-powered-by");
