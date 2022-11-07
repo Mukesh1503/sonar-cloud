@@ -41,20 +41,6 @@ router.post("/update", upload.single("photo"), (req, res) => {
     const fcontact = req.body.contact;
     const id = req.body.id;
 
-    if (!(fname
-      || filename
-      || frole
-      || fdept
-      || fempid
-      || fdob
-      || femail
-      || flocation
-      || fcontact
-    )) {
-      res.status(422).json({ status: 422, message: "fill all the details" });
-    }
-    else {
-
       try {
         let sql = `UPDATE employees SET ? WHERE id = ?`
         let id_no = `${id}`
@@ -83,7 +69,6 @@ router.post("/update", upload.single("photo"), (req, res) => {
       } catch (error) {
         res.status(422).json({ status: 422, error });
       }
-    }
   } catch (error) {
     const filename = req.body.photo;
     const fname = req.body.name;
@@ -96,20 +81,6 @@ router.post("/update", upload.single("photo"), (req, res) => {
     const fcontact = req.body.contact;
     const id = req.body.id;
 
-    if (!(fname
-      || filename
-      || frole
-      || fdept
-      || fempid
-      || fdob
-      || femail
-      || flocation
-      || fcontact
-    )) {
-      res.status(422).json({ status: 422, message: "fill all the details" });
-    }
-    else {
-
       try {
         let sql = `UPDATE employees SET ? WHERE id = ?`
         let id_no = `${id}`
@@ -138,7 +109,6 @@ router.post("/update", upload.single("photo"), (req, res) => {
       } catch (error) {
         res.status(422).json({ status: 422, error });
       }
-    }
   }
 });
 
@@ -154,19 +124,6 @@ router.post("/register", upload.single("photo"), (req, res) => {
   const flocation = req.body.location;
   const fcontact = req.body.contact;
 
-  if (!(fname
-    || filename
-    || frole
-    || fdept
-    || fempid
-    || fdob
-    || femail
-    || flocation
-    || fcontact
-  )) {
-    res.status(422).json({ status: 422, message: "fill all the details" });
-  }
-  else {
     try {
 
       conn.query(
@@ -194,7 +151,6 @@ router.post("/register", upload.single("photo"), (req, res) => {
     } catch (error) {
       res.status(422).json({ status: 422, error });
     }
-  }
 });
 
 // get user data
