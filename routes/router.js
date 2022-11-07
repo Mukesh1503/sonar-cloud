@@ -2,10 +2,10 @@ const express = require("express");
 const router = new express.Router();
 const conn = require("../db/conn");
 const multer = require("multer");
-const moment = require("moment");
+
 
 // img storage confing
-var imgconfig = multer.diskStorage({
+const imgconfig = multer.diskStorage({
   destination: (req, photo, callback) => {
     callback(null, "./uploads");
   },
@@ -23,7 +23,7 @@ const isImage = (req, photo, callback) => {
   }
 };
 
-var upload = multer({
+const upload = multer({
   storage: imgconfig,
   fileFilter: isImage,
 });
@@ -56,11 +56,11 @@ router.post("/update", upload.single("photo"), (req, res) => {
     }
 
     try {
-      let date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
-
+      let sql = `UPDATE employees SET ? WHERE id = ?`
+      let id_no = `${id}`
       conn.query(
-        `UPDATE employees SET ? WHERE id = '${id}'`,
-        {
+        sql,
+        [{
           name: fname,
           role: frole,
           dept: fdept,
@@ -70,7 +70,7 @@ router.post("/update", upload.single("photo"), (req, res) => {
           location: flocation,
           contact: fcontact,
           path: filename,
-        },
+        },id_no],
         (err, result) => {
           if (err) {
             console.log("error");
@@ -110,11 +110,11 @@ router.post("/update", upload.single("photo"), (req, res) => {
     }
 
     try {
-      let date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
-
+      let sql = `UPDATE employees SET ? WHERE id = ?`
+      let id_no = `${id}`
       conn.query(
-        `UPDATE employees SET ? WHERE id = '${id}'`,
-        {
+        sql,
+        [{
           name: fname,
           role: frole,
           dept: fdept,
@@ -124,7 +124,7 @@ router.post("/update", upload.single("photo"), (req, res) => {
           location: flocation,
           contact: fcontact,
           path: filename,
-        },
+        },id_no],
         (err, result) => {
           if (err) {
             console.log("error");
@@ -167,7 +167,6 @@ router.post("/register", upload.single("photo"), (req, res) => {
   }
 
   try {
-    let date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
 
     conn.query(
       "INSERT INTO employees SET ?",
@@ -216,7 +215,9 @@ router.get("/getdata", (req, res) => {
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   try {
-    conn.query(`DELETE FROM employees WHERE id ='${id}'`, (err, result) => {
+    let sql = `DELETE FROM employees WHERE id = ?`
+    let id_no = `${id}`
+    conn.query(sql,[id_no], (err, result) => {
       if (err) {
         console.log("error");
       } else {
