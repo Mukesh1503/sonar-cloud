@@ -2,7 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const conn = require("../db/conn");
 const multer = require("multer");
-
+const fs = require('fs')
 
 // img storage confing
 const imgconfig = multer.diskStorage({
@@ -29,86 +29,53 @@ const upload = multer({
 });
 
 router.post("/update", upload.single("photo"), (req, res) => {
+
+  let filename
+  try{
+    filename = req.file.path
+    console.log("exist - 1")
+  }
+  catch(error){
+    filename = req.body.photo
+    console.log("exist - 2")
+  }
+  const fname = req.body.name;
+  const frole = req.body.role;
+  const fdept = req.body.department;
+  const fempid = req.body.empid;
+  const fdob = req.body.dob;
+  const femail = req.body.email;
+  const flocation = req.body.location;
+  const fcontact = req.body.contact;
+  const id = req.body.id;
+
   try {
-    const filename = req.file.path;
-    const fname = req.body.name;
-    const frole = req.body.role;
-    const fdept = req.body.department;
-    const fempid = req.body.empid;
-    const fdob = req.body.dob;
-    const femail = req.body.email;
-    const flocation = req.body.location;
-    const fcontact = req.body.contact;
-    const id = req.body.id;
-
-      try {
-        let sql = `UPDATE employees SET ? WHERE id = ?`
-        let id_no = `${id}`
-        conn.query(
-          sql,
-          [{
-            name: fname,
-            role: frole,
-            dept: fdept,
-            emp_id: fempid,
-            dob: fdob,
-            email: femail,
-            location: flocation,
-            contact: fcontact,
-            path: filename,
-          }, id_no],
-          (err, result) => {
-            if (err) {
-              console.log("error");
-            } else {
-              console.log("data updated");
-              res.status(201).json({ status: 201, data: req.body });
-            }
-          }
-        );
-      } catch (error) {
-        res.status(422).json({ status: 422, error });
+    let sql = `UPDATE employees SET ? WHERE id = ?`
+    let id_no = `${id}`
+    conn.query(
+      sql,
+      [{
+        name: fname,
+        role: frole,
+        dept: fdept,
+        emp_id: fempid,
+        dob: fdob,
+        email: femail,
+        location: flocation,
+        contact: fcontact,
+        path: filename,
+      }, id_no],
+      (err, result) => {
+        if (err) {
+          console.log("error");
+        } else {
+          console.log("data updated");
+          res.status(201).json({ status: 201, data: req.body });
+        }
       }
+    );
   } catch (error) {
-    const filename = req.body.photo;
-    const fname = req.body.name;
-    const frole = req.body.role;
-    const fdept = req.body.department;
-    const fempid = req.body.empid;
-    const fdob = req.body.dob;
-    const femail = req.body.email;
-    const flocation = req.body.location;
-    const fcontact = req.body.contact;
-    const id = req.body.id;
-
-      try {
-        let sql = `UPDATE employees SET ? WHERE id = ?`
-        let id_no = `${id}`
-        conn.query(
-          sql,
-          [{
-            name: fname,
-            role: frole,
-            dept: fdept,
-            emp_id: fempid,
-            dob: fdob,
-            email: femail,
-            location: flocation,
-            contact: fcontact,
-            path: filename,
-          }, id_no],
-          (err, result) => {
-            if (err) {
-              console.log("error");
-            } else {
-              console.log("data updated");
-              res.status(201).json({ status: 201, data: req.body });
-            }
-          }
-        );
-      } catch (error) {
-        res.status(422).json({ status: 422, error });
-      }
+    res.status(422).json({ status: 422, error });
   }
 });
 
@@ -124,33 +91,33 @@ router.post("/register", upload.single("photo"), (req, res) => {
   const flocation = req.body.location;
   const fcontact = req.body.contact;
 
-    try {
+  try {
 
-      conn.query(
-        "INSERT INTO employees SET ?",
-        {
-          name: fname,
-          role: frole,
-          dept: fdept,
-          emp_id: fempid,
-          dob: fdob,
-          email: femail,
-          location: flocation,
-          contact: fcontact,
-          path: filename,
-        },
-        (err, result) => {
-          if (err) {
-            console.log("error");
-          } else {
-            console.log("data added");
-            res.status(201).json({ status: 201, data: req.body });
-          }
+    conn.query(
+      "INSERT INTO employees SET ?",
+      {
+        name: fname,
+        role: frole,
+        dept: fdept,
+        emp_id: fempid,
+        dob: fdob,
+        email: femail,
+        location: flocation,
+        contact: fcontact,
+        path: filename,
+      },
+      (err, result) => {
+        if (err) {
+          console.log("error");
+        } else {
+          console.log("data added");
+          res.status(201).json({ status: 201, data: req.body });
         }
-      );
-    } catch (error) {
-      res.status(422).json({ status: 422, error });
-    }
+      }
+    );
+  } catch (error) {
+    res.status(422).json({ status: 422, error });
+  }
 });
 
 // get user data
