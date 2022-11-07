@@ -6,9 +6,13 @@ const router = require("./routes/router");
 const { config } = require("dotenv");
 const path = require('path')
 
+let corsOptions = {
+  origin: '*'
+}
 
+app.disable("x-powered-by");
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 config({path:'./config.env'})
 
 app.use("/uploads", express.static("./uploads"));
