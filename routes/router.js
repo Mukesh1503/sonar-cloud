@@ -27,7 +27,7 @@ const upload = multer({
   storage: imgconfig,
   fileFilter: isImage,
   limits: {
-    fileSize: 10000000
+    fileSize: 8000000
   }
 });
 
