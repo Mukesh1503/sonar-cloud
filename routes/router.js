@@ -26,6 +26,9 @@ const isImage = (req, photo, callback) => {
 const upload = multer({
   storage: imgconfig,
   fileFilter: isImage,
+  limits: {
+    fileSize: 10000000
+  }
 });
 
 router.post("/update", upload.single("photo"), (req, res) => {
