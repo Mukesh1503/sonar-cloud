@@ -1,0 +1,90 @@
+.Bio-Data {
+  background-color: #ace4aa;
+  text-align: center;
+}
+.user-profiles img {
+  margin-top: -10px;
+  width: 200px;
+  height: 200px;
+  border-radius: 100%;
+}
+.view-Details h2 {
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+.view-Details p {
+  padding-bottom: 8px;
+  font-size: 15px;
+}
+.more-info label {
+  font-size: 15px;
+}
+.more-info .view-info {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  padding-bottom: 40px;
+}
+.view-info button {
+  background-color: white;
+  color: black;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.Bio-Data .Edit-Del {
+  color: white;
+  background-color: black;
+  height: 40px;
+  width: 100px;
+  border-radius: 5px;
+  z-index: 1;
+  margin-bottom: 10px;
+  border-color: black;
+  margin-top: 10px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.edit-del {
+  text-align: right;
+}
+.view-page-icon {
+  font-size: 25px;
+}
+.view-info button:hover {
+  border-bottom: 2px solid black;
+}
+.view-info button:focus {
+  border-bottom: 2px solid black;
+}
+
+@media screen and (max-width: 1120px) {
+  .user-profiles img {
+    width: 190px;
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .view-info button {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .view-info button {
+    width: 40px;
+    height: 40px;
+  }
+  .Bio-Data .Edit-Del {
+    height: 35px;
+    width: 80px;
+    margin-bottom: 20px;
+  }
+}

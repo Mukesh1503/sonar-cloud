@@ -1,0 +1,19 @@
+.slider {
+  margin-top: 8vh;
+  display: inline-block;
+  background-color: #ace4aa;
+  overflow: auto;
+  height: 80vh;
+}
+.main {
+  margin-top: 100px;
+  white-space: nowrap;
+  align-items: center;
+  background-color: #ace4aa;
+}
+@media screen and (max-width: 740px) {
+  .slider {
+    margin-top: 5vh;
+    height: 88vh;
+  }
+}
