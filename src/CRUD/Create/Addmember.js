@@ -1,5 +1,5 @@
 import "./Addmember.css";
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import { FaArrowCircleRight } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -7,18 +7,10 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
 function Addmember(props) {
+
   const [photo, setPhoto] = useState("");
 
-  const initialValues = {
-    name: "",
-    role: "",
-    department: "",
-    empid: "",
-    dob: "",
-    email: "",
-    location: "",
-    contact: "",
-  };
+  const initialValues = {name: "", role: "", department: "",empid: "",dob: "",email: "",location: "",contact: ""};
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const [isSubmit, setIsSubmit] = useState(false);
@@ -43,6 +35,7 @@ function Addmember(props) {
   };
 
   const addUserData = async () => {
+      
     let formData = new FormData();
     formData.append("photo", photo);
     formData.append("name", formValues.name);
@@ -83,69 +76,50 @@ function Addmember(props) {
   const validate = (values) => {
     const errors = {};
 
-    const userregrex = /[a-z]$/i;
-    const Emailregex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
-    const contactregrex = /\d{10}/i;
+    const userregrex = /[a-z]$/i
+    const Emailregex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
+    const contactregrex = /\d{10}/i
 
     if (!values.name) {
       errors.name = "Username is required!";
-    } else if (!userregrex.test(values.name)) {
-      errors.name = "username should be alphabets";
-    } else {
-      if (!values.email) {
-        errors.email = "Email is required!";
-      } else if (!Emailregex.test(values.email)) {
-        errors.email = "This is not a valid email format!";
-      } else {
-        if (!values.empid) {
-          errors.empid = "Employee ID is required";
-        } else if (values.empid.length < 4) {
-          errors.empid = "Employee ID must be more than 4 characters";
-        } else {
-          if (!values.location) {
-            errors.location = "Location is required";
-          } else {
-            if (!values.contact) {
-              errors.contact = "contact is required";
-            } else if (
-              values.contact.length != 10 ||
-              !contactregrex.test(values.contact)
-            ) {
-              errors.contact = "This is not a valid mobile number";
-            } else {
-              if (!values.dob) {
-                errors.dob = "Date of Birth is required";
-              } else if (
-                new Date().getFullYear() - new Date(values.dob).getFullYear() <
-                18
-              ) {
-                errors.dob = "Age should be greater than 18";
-              } else {
-                if (
-                  values.role == "Please choose one option" ||
-                  values.role == ""
-                ) {
-                  errors.role = "Role is required";
-                } else {
-                  if (
-                    values.department == "Please choose one option" ||
-                    values.department == ""
-                  ) {
-                    errors.department = "Department is required";
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+    }else if(!userregrex.test(values.name)){
+      errors.name = "username should be alphabets"
+    }
+    if (!values.email) {
+      errors.email = "Email is required!";
+    } else if (!Emailregex.test(values.email)) {
+      errors.email = "This is not a valid email format!";
+    }
+    if (!values.empid) {
+      errors.empid = "Employee ID is required";
+    } else if (values.empid.length < 4) {
+      errors.empid = "Employee ID must be more than 4 characters";
+    }
+    if(!values.location){
+      errors.location = "Location is required";
+    }
+    if(!values.contact){
+      errors.contact = "contact is required";
+    }else if(values.contact.length != 10 || !contactregrex.test(values.contact)){
+      errors.contact = "This is not a valid mobile number"
+    }
+    if(!values.dob){
+      errors.dob = "Date of Birth is required"
+    }else if((new Date().getFullYear() - (new Date(values.dob)).getFullYear()) < 18){
+      errors.dob = "Age should be greater than 18"
+    }
+    if(values.role == "Please choose one option" || values.role == ""){
+      errors.role = "Role is required"
+    }
+    if(values.department == "Please choose one option" || values.department ==""){
+      errors.department = "Department is required"
     }
     return errors;
   };
 
   useEffect(() => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      addUserData();
+      addUserData()
     }
   }, [formErrors]);
 
@@ -208,7 +182,7 @@ function Addmember(props) {
           display: isActive ? "none" : "",
         }}
       >
-        <button className="submit-upload" onClick={() => setIsActive(true)}>
+        <button className="submit-upload" onClick={()=>setIsActive(true)}>
           Next&nbsp;&nbsp;
           <FaArrowCircleRight style={{ fontSize: "10px" }} />
         </button>
@@ -228,7 +202,7 @@ function Addmember(props) {
           <input
             type="text"
             onChange={handleChange}
-            value={formValues.name}
+            value ={formValues.name} 
             name="name"
             placeholder="Enter your name"
           />
@@ -239,7 +213,7 @@ function Addmember(props) {
           <select
             name="role"
             onChange={handleChange}
-            value={formValues.role}
+            value ={formValues.role} 
             id="role"
             required
           >
@@ -255,7 +229,7 @@ function Addmember(props) {
           <select
             name="department"
             onChange={handleChange}
-            value={formValues.department}
+            value ={formValues.department} 
             id="Department"
             required
           >
@@ -273,7 +247,7 @@ function Addmember(props) {
             onChange={handleChange}
             name="empid"
             placeholder="Enter your Employee Id"
-            value={formValues.empid}
+            value ={formValues.empid} 
           />
           <p>{formErrors.empid}</p>
           <br />
@@ -285,7 +259,7 @@ function Addmember(props) {
             type="date"
             onChange={handleChange}
             name="dob"
-            value={formValues.dob}
+            value ={formValues.dob} 
           />
           <p>{formErrors.dob}</p>
           <br />
@@ -296,7 +270,7 @@ function Addmember(props) {
             name="email"
             onChange={handleChange}
             placeholder="Enter your Mail Id"
-            value={formValues.email}
+            value ={formValues.email} 
           />
           <p>{formErrors.email}</p>
           <br />
@@ -306,7 +280,7 @@ function Addmember(props) {
             name="location"
             onChange={handleChange}
             placeholder="Enter your working location"
-            value={formValues.location}
+            value ={formValues.location} 
           />
           <p>{formErrors.location}</p>
           <br />
@@ -317,7 +291,7 @@ function Addmember(props) {
             name="contact"
             onChange={handleChange}
             placeholder="Enter your mobile number"
-            value={formValues.contact}
+            value ={formValues.contact} 
           />
           <p>{formErrors.contact}</p>
           <br />
