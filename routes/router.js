@@ -37,11 +37,9 @@ router.post("/update", upload.single("photo"), (req, res) => {
   let filename
   try{
     filename = req.file.path
-    console.log("exist - 1")
   }
   catch(error){
     filename = req.body.photo
-    console.log("exist - 2")
   }
   const fname = req.body.name;
   const frole = req.body.role;
@@ -85,7 +83,14 @@ router.post("/update", upload.single("photo"), (req, res) => {
 
 // register userdata
 router.post("/register", upload.single("photo"), (req, res) => {
-  const filename = req.file.path;
+  let filename
+  try{
+    filename = req.file.path
+    console.log(req.file.path)
+  }
+  catch(error){
+    filename = "uploads\\default.png"
+  }
   const fname = req.body.name;
   const frole = req.body.role;
   const fdept = req.body.department;
