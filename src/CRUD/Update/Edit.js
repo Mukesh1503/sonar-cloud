@@ -27,7 +27,7 @@ const Edit = (props) => {
   const updateUserData = async (e) => {
     e.preventDefault();
 
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append("photo", photo);
     formData.append("name", name);
     formData.append("role", role);

@@ -36,7 +36,7 @@ function Addmember(props) {
 
   const addUserData = async () => {
       
-    var formData = new FormData();
+    let formData = new FormData();
     formData.append("photo", photo);
     formData.append("name", formValues.name);
     formData.append("role", formValues.role);
@@ -76,9 +76,9 @@ function Addmember(props) {
   const validate = (values) => {
     const errors = {};
 
-    const userregrex = /[A-Za-z]$/i
-    const Emailregex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i
-    const contactregrex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/i
+    const userregrex = /[a-z]$/i
+    const Emailregex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/
+    const contactregrex = /^[0-9]*$/i
 
     if (!values.name) {
       errors.name = "Username is required!";
@@ -100,7 +100,7 @@ function Addmember(props) {
     }
     if(!values.contact){
       errors.contact = "contact is required";
-    }else if(!contactregrex.test(values.contact)){
+    }else if(values.contact.length != 10 || !contactregrex.test(values.contact)){
       errors.contact = "This is not a valid mobile number"
     }
     if(!values.dob){
